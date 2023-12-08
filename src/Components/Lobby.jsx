@@ -2,6 +2,7 @@ import React from "react";
 import { Stats, OrbitControls, Circle } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import Link from "next/link";
 
 function Lobby() {
   const gltf = useLoader(GLTFLoader, "./models/Character_Soldier.gltf");
@@ -45,7 +46,7 @@ function Lobby() {
                   className="h-8 w-auto"
                 />
                 <p>
-                  <a href="/optstore">Store</a>
+                  <Link href="/optstore">Store</Link>
                 </p>
               </div>
               <div className="flex items-center my-5 space-x-5">
@@ -55,7 +56,7 @@ function Lobby() {
                   className="h-8 w-auto"
                 />
                 <p>
-                  <a href="/optstore">Luck Royale</a>
+                  <Link href="/optstore">Luck Royale</Link>
                 </p>
               </div>
               <div className="flex items-center space-x-5">
@@ -65,7 +66,7 @@ function Lobby() {
                   className="h-8 w-auto"
                 />
                 <p>
-                  <a href="/Guns">Vault</a>
+                  <Link href="/Guns">Vault</Link>
                 </p>
               </div>
             </div>
@@ -111,11 +112,11 @@ function Lobby() {
               </p>
             </div>
             <div className="flex justify-center">
-              <a href="/game">
+              <Link href="/game">
                 <button className="playbtm px-10 font-semibold  py-2 mt-5 text-xl text-black ">
                   Play!!
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

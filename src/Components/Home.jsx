@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import { MdArrowOutward } from "react-icons/md";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 export default function Home() {
   const connection = useSelector((state) => state.connection);
@@ -44,11 +45,11 @@ export default function Home() {
                   o<span className="text-[#9FC610]">f</span> Ga
                   <span className="text-[#9FC610]">m</span>ing
                 </p>
-                <div className="">
+                <Link href="/lobby">
                   <button className="border-2 md:w-60 rounded-full border-l-8 py-2 px-3 border-[#9FC610] text-xl md:text-4xl">
                     Play Now!!
                   </button>
-                </div>
+                </Link>
               </div>
               <img
                 src="https://blogger.googleusercontent.com/img/a/AVvXsEh1dHNAY4W4MI43iyLovJU2odsRcgAhYdF0ZoBmhqVtABSGzoWKTTBtEZwvp3GdUvQsXm-SVPuknlqo1zE_soRClWu_CbJsrcisWU_fR_d8c-Jb8EWneLBPmcz4PUHXT0kvgV5c1kGF34HB_sSX3IUuFB9RaM9ipUjr5F0CkxTm-_av64iI9mT8RWMCNio"
@@ -273,11 +274,11 @@ export default function Home() {
         </div>
         <div className="flex  md:flex-row  items-center flex-col mx-5 md:mx-60   justify-between">
           <div className="md:mr-20">
-            <a href="/lobby">
+            <Link href="/lobby">
               <button className="border-2 w-60 mt-5 rounded-full border-l-8 py-2 px-3 border-[#9FC610] text-3xl">
                 Play Now!!
               </button>
-            </a>
+            </Link>
           </div>
           <div>
             <div className="border- mt-5 md:mt-0 border-[#9FC610] flex flex-col space-y-3 items-center border-r-8 border-b-4 px-8 py-14 rounded-full">

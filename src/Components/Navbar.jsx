@@ -15,6 +15,7 @@ import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { polygonZkEvmTestnet } from "viem/chains";
+import Link from "next/link";
 
 const { chains, publicClient } = configureChains(
   [polygonZkEvmTestnet],
@@ -53,12 +54,12 @@ function Navbar() {
               aria-label="Global"
             >
               <div className="flex space-x-4 lg:flex-1">
-                <a href="/" className="flex space-x-4">
+                <Link href="/" className="flex space-x-4">
                   <img className="h-16 w-auto" src="" alt="" />
                   <p className=" text-xl mt-5 md:mt-2 md:text-2xl font-bold font-serif ">
                     BLOCKBATTLE
                   </p>
-                </a>
+                </Link>
               </div>
               <div className="flex lg:hidden">
                 <button
@@ -73,13 +74,13 @@ function Navbar() {
 
               <div className="hidden lg:flex lg:gap-x-12">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     className="text-lg font-semibold  leading-6 text-gray-200"
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -100,12 +101,12 @@ function Navbar() {
               <div className="fixed inset-0 z-50" />
               <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                 <div className="flex items-center justify-between">
-                  <a href="/" className="flex space-x-4">
+                  <Link href="/" className="flex space-x-4">
                     <img className="h-12 w-auto" src="" alt="" />
                     <p className=" text-lg md:text-2xl text-gray-200 font-bold font-serif mt-2">
                       BLOCKBATTLE
                     </p>
-                  </a>
+                  </Link>
                   <button
                     type="button"
                     className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -119,13 +120,13 @@ function Navbar() {
                   <div className="-my-6 divide-y divide-gray-500/10">
                     <div className="space-y-2 py-6">
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
                           href={item.href}
                           className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-200"
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                     <div className="py-6">
