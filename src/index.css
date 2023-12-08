@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.root {
+  width: 100vw;
+  height: 100vh;
+}
+.root2 {
+  width: 60vw;
+  height: 82vh;
+}
+
+body {
+  margin: 0;
+}
+
+
+.herobtn{
+  border-radius: 100px;
+border: 0.8px solid #FFF;
+background: #719C0C;
+box-shadow: 4px 4px 8.3px 1px rgba(255, 255, 255, 0.57) inset;
+}
+
+
+.text-bg{
+  box-shadow: -5.605757713317871px 5.605757713317871px 3.0184848308563232px 0px #00000080;
+
+box-shadow: -1.7248485088348389px 1.810164451599121px 3.4496970176696777px 0px #B9FF234D;
+
+}
+
+.homeprofilebg{
+  background: rgba(13, 13, 13, 0.74);
+  border-radius: 13px;
+border: 1px solid #9FC610;
+background: rgba(13, 13, 13, 0.74);
+
+}
+
+.homebox{
+  border-radius: 20px;
+border: 1px solid rgba(159, 198, 16, 0.26);
+background: rgba(13, 13, 13, 0.74);
+}
+
+.mapbox{
+  border-radius: 6.25px;
+border: 1.25px solid #9FC610;
+background: rgba(0, 0, 0, 0.69);
+}
+
+.playbtm{
+  border-radius: 10px;
+background: #9FC610;
+box-shadow: 0px 0px 26.6px 9px rgba(20, 20, 21, 0.39) inset;
+}

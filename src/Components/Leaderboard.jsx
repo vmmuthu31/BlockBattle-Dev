@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { usePlayersList } from "playroomkit";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setSomeValue } from "../../slices/yourSlice";
+import { setSomeValue } from "../../store/yourSlice";
 
 export const Leaderboard = () => {
   const players = usePlayersList(true);
