@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Stats, OrbitControls, Circle } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Link from "next/link";
+import { getPlayerData } from "../config/BlockchainServices";
+import { useAccount } from "wagmi";
 
 function Lobby() {
   const gltf = useLoader(GLTFLoader, "./models/Character_Soldier.gltf");
+  const { address, isConnected } = useAccount();
+  const playerAddress = address;
+  console.log("add", address);
+  const [playerdata, setPlayerdata] = useState("");
+  useEffect(() => {
+    async function getplayere() {
+      const res = await getPlayerData({ playerAddress });
+      console.log("res", res);
+      setPlayerdata(res);
+    }
+    getplayere();
+  }, [address]);
 
   return (
     <>
@@ -17,7 +31,9 @@ function Lobby() {
               className="h-12 w-auto"
               alt=""
             />
-            <p>Prashantexe</p>
+            <p>
+              {playerdata[0]} LVL {playerdata[3]?.toString()}
+            </p>
           </div>
           <div className="flex items-center space-x-2">
             <img
@@ -25,7 +41,7 @@ function Lobby() {
               alt=""
               className="h-8 w-auto"
             />
-            <p>415</p>
+            <p>{playerdata[1]?.toString()}</p>
           </div>
           <div className="flex items-center space-x-2">
             <img
@@ -33,7 +49,7 @@ function Lobby() {
               alt=""
               className="h-8 w-auto"
             />
-            <p>98 +</p>
+            <p>{playerdata[2]?.toString()}</p>
           </div>
         </div>
         <div className="flex  text-white text-2xl font-semibold  justify-between mx-20">

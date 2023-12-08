@@ -36,7 +36,7 @@
     "three": "^0.159.0",
     "three-stdlib": "^2.28.7",
     "viem": "^1.19.11",
-    "wagmi": "^1.4.10",
+    "wagmi": "^0.9.6",
     "web3": "^4.3.0"
   },
   "devDependencies": {
