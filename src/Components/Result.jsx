@@ -123,7 +123,6 @@ const Result = () => {
         winner = player;
       }
     });
-
     const winnerCard = document.getElementById("winner");
     winnerCard.innerHTML = `
             <div class="u-text-small u-text--medium u-mb--16">MVP of the Match🔥</div>
@@ -132,7 +131,6 @@ const Result = () => {
             <span class="u-text--teal u-text--small">${winner.name}</span>
         `;
   }, []);
-
   return (
     <>
       <ContentPairProvider contentTopic={"/BlockBattle/" + room}>
