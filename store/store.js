@@ -7,8 +7,6 @@ const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: ["SET_CONNECTION_DETAILS"],
-        // Optionally, ignore specific paths in the state
-        // ignoredPaths: ['connection.provider']
       },
     }),
 });
