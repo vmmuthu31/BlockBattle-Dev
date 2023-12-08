@@ -3,6 +3,7 @@ import { usePlayersList } from "playroomkit";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSomeValue } from "../../store/yourSlice";
+import { useAccount } from "wagmi";
 
 export const Leaderboard = () => {
   const players = usePlayersList(true);
@@ -12,6 +13,19 @@ export const Leaderboard = () => {
   const handleButtonClick = () => {
     dispatch(setSomeValue(players));
   };
+  console.log("players data", players);
+  const { address, isConnected } = useAccount();
+  const playerAddress = address;
+  console.log("add", address);
+  const [playerdata, setPlayerdata] = useState("");
+  useEffect(() => {
+    async function getplayere() {
+      const res = await getPlayerData({ playerAddress });
+      console.log("res", res);
+      setPlayerdata(res);
+    }
+    getplayere();
+  }, [address]);
 
   const navigate = useNavigate();
 
@@ -128,9 +142,7 @@ export const Leaderboard = () => {
               }}
             />
             <div className="flex-grow">
-              <h2 className={`font-bold text-sm`}>
-                {player.state.profile?.name}
-              </h2>
+              <h2 className={`font-bold text-sm`}>{playerdata[0]}</h2>
               <div className="flex text-sm items-center gap-4">
                 <p>🔫 {player.state.kills}</p>
                 <p>💀 {player.state.deaths}</p>
