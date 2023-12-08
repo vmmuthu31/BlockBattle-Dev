@@ -8,8 +8,12 @@ import store from "../store/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" exact element={<App />} />
+        </Routes>
+      </Provider>
+    </Router>
   </React.StrictMode>
 );
