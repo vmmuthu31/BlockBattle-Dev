@@ -18,7 +18,7 @@ const Result = () => {
 
   const someValue = useSelector((state) => state.yourSlice.someValue);
 
-  const room = someValue[0].id;
+  const room = someValue;
   const [applyed, setApplyed] = useState(false);
   const [myrank, setrank] = useState(false);
 
@@ -149,12 +149,12 @@ const Result = () => {
                   <div className="u-display--flex u-justify--space-between">
                     <div className="u-text--left">
                       <div className="u-text--small">Room</div>
-                      <h1>{someValue[0].id}</h1>
+                      <h1>{someValue}</h1>
                     </div>
                     <div className="u-text--right">
                       <div className="u-text--small">Total bedding</div>
                       <h2>
-                        {someValue.kills}/{someValue.deaths}
+                        {someValue}/{someValue}
                       </h2>
                     </div>
                   </div>
@@ -171,9 +171,7 @@ const Result = () => {
                 <div className="c-card__header">
                   <h3>Rank</h3>
                   <select className="c-select">
-                    <option selected="selected">
-                      RoomId : {someValue[0].id}
-                    </option>
+                    <option selected="selected">RoomId : {someValue}</option>
                   </select>
                 </div>
                 <div className="c-card__body">

@@ -4,6 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSomeValue } from "../../store/yourSlice";
 import { useAccount } from "wagmi";
+import { getPlayerData } from "../config/BlockchainServices";
+const getRoomIdFromURL = () => {
+  const hash = window.location.hash;
+  const roomId = hash.split("=")[1]; // Split the hash by '=' and get the second part
+  return roomId;
+};
 
 export const Leaderboard = () => {
   const players = usePlayersList(true);
@@ -11,8 +17,14 @@ export const Leaderboard = () => {
   const dispatch = useDispatch();
   const someValue = useSelector((state) => state.yourSlice.someValue);
   const handleButtonClick = () => {
-    dispatch(setSomeValue(players));
+    dispatch(setSomeValue(roomId));
   };
+  const [roomId, setRoomId] = useState("");
+
+  useEffect(() => {
+    setRoomId(getRoomIdFromURL());
+  }, [window.location.hash]);
+  console.log("room id", roomId);
   console.log("players data", players);
   const { address, isConnected } = useAccount();
   const playerAddress = address;
@@ -26,7 +38,7 @@ export const Leaderboard = () => {
     }
     getplayere();
   }, [address]);
-
+  console.log("playername", playerdata[0]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -142,7 +154,10 @@ export const Leaderboard = () => {
               }}
             />
             <div className="flex-grow">
-              <h2 className={`font-bold text-sm`}>{playerdata[0]}</h2>
+              <h2 className={`font-bold text-sm`}>
+                {player.state.profile.name ? playerdata[0] : "Loading..."}
+              </h2>
+
               <div className="flex text-sm items-center gap-4">
                 <p>🔫 {player.state.kills}</p>
                 <p>💀 {player.state.deaths}</p>

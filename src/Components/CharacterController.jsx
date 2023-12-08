@@ -4,6 +4,8 @@ import { CapsuleCollider, RigidBody, vec3 } from "@react-three/rapier";
 import { isHost } from "playroomkit";
 import { useEffect, useRef, useState } from "react";
 import { CharacterSoldier } from "./CharacterSoldier";
+import { getPlayerData } from "../config/BlockchainServices";
+import { useAccount } from "wagmi";
 
 const MOVEMENT_SPEED = 202;
 const FIRE_RATE = 380;
@@ -259,7 +261,20 @@ export const CharacterController = ({
 
 const PlayerInfo = ({ state }) => {
   const health = state.health;
-  const name = state.profile.name;
+  const { address, isConnected } = useAccount();
+  const playerAddress = address;
+  console.log("add", address);
+  const [playerdata, setPlayerdata] = useState("");
+  useEffect(() => {
+    async function getplayere() {
+      const res = await getPlayerData({ playerAddress });
+      console.log("res", res);
+      setPlayerdata(res);
+    }
+    getplayere();
+  }, [address]);
+  console.log("playername", playerdata[0]);
+  const name = playerdata[0];
   return (
     <Billboard position-y={2.5}>
       <Text position-y={0.36} fontSize={0.4}>
