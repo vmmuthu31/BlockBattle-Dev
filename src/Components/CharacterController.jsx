@@ -88,20 +88,6 @@ export const CharacterController = ({
   }, [state.state.health]);
 
   useFrame((_, delta) => {
-    // CAMERA FOLLOW
-
-    // if (joystick.isPressed("swap")) {
-    //   setWeapon(WEAPONS[i]);
-
-    //   if(i == WEAPONS.length){
-    //     i=0
-    //   }else{
-    //     i++;
-    //   }
-    //   // CharacterSoldier({color:state.state.profile?.color,animation:animation,weapon:weapon})
-    //   console.log("Weapons are swaapped...!", weapon)
-    // }
-
     if (controls.current) {
       const cameraDistanceY = window.innerWidth < 1024 ? 16 : 20;
       const cameraDistanceZ = window.innerWidth < 1024 ? 12 : 16;
@@ -249,14 +235,11 @@ export const CharacterController = ({
           )}
         </group>
         {userPlayer && (
-          // Finally I moved the light to follow the player
-          // This way we won't need to calculate ALL the shadows but only the ones
-          // that are in the camera view
           <directionalLight
             ref={directionalLight}
             position={[25, 18, -25]}
             intensity={0.3}
-            castShadow={!downgradedPerformance} // Disable shadows on low-end devices
+            castShadow={!downgradedPerformance}
             shadow-camera-near={0}
             shadow-camera-far={100}
             shadow-camera-left={-20}

@@ -3,6 +3,7 @@ import { useGraph } from "@react-three/fiber";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Color, LoopOnce, MeshStandardMaterial } from "three";
 import { SkeletonUtils } from "three-stdlib";
+/models/;
 const WEAPONS = [
   "GrenadeLauncher",
   "AK",
