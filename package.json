@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@waku/react": "^0.0.5-63a782d",
     "ethers": "^5.7.2",
+    "next": "^14.0.4",
     "playroomkit": "^0.0.51",
     "protobufjs": "^7.2.5",
     "react": "^18.2.0",
