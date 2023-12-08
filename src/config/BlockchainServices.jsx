@@ -107,6 +107,72 @@ export const addvechileassets = async ({
   return tokenId;
 };
 
+export const startgame = async ({ gameid, gameplayers }) => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(ContractADD, ABI, signer);
+  const tokenId = await Role.startGame(gameid, gameplayers);
+  return tokenId;
+};
+
+export const getPlayerData = async ({ playerAddress }) => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(ContractADD, ABI, signer);
+  const tokenId = await Role.getPlayerData(playerAddress);
+  return tokenId;
+};
+
+export const endGame = async ({ gameid, winner, highestkills, imghash }) => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(ContractADD, ABI, signer);
+  const tokenId = await Role.endGame(gameid, winner, highestkills, imghash);
+  return tokenId;
+};
+
+export const getPlayerAssets = async ({ playerAddress }) => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(ContractADD, ABI, signer);
+  const tokenId = await Role.getPlayerAssets(playerAddress);
+  return tokenId;
+};
+
+export const updatePlayerProfile = async ({ playerAddress }) => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(ContractADD, ABI, signer);
+  const tokenId = await Role.updatePlayerProfile(playerAddress);
+  return tokenId;
+};
+
+export const _mintNFT = async ({ gameid, imghash, playerAddress }) => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(ContractADD, ABI, signer);
+  const tokenId = await Role._mintNFT(gameid, imghash, playerAddress);
+  return tokenId;
+};
+
 export const buyasset = async ({ playeradd, assetid, assettype, price }) => {
   const provider =
     window.ethereum != null
