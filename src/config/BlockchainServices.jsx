@@ -162,14 +162,14 @@ export const updatePlayerProfile = async ({ playerAddress }) => {
   return tokenId;
 };
 
-export const _mintNFT = async ({ gameid, imghash, playerAddress }) => {
+export const getPlayerNFTs = async ({ playerAddress }) => {
   const provider =
     window.ethereum != null
       ? new ethers.providers.Web3Provider(window.ethereum)
       : ethers.providers.getDefaultProvider();
   const signer = provider.getSigner();
   const Role = new ethers.Contract(ContractADD, ABI, signer);
-  const tokenId = await Role._mintNFT(gameid, imghash, playerAddress);
+  const tokenId = await Role.getPlayerNFTs(playerAddress);
   return tokenId;
 };
 
