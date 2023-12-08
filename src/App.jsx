@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { Physics } from "@react-three/rapier";
 import { Suspense, useState } from "react";
-import { Experience } from "./components/Experience";
+import { Experience } from "./Components/Experience";
 import { Leaderboard } from "./Components/Leaderboard";
 
 function App() {
