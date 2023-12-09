@@ -57,16 +57,26 @@ const Result = () => {
     const gameIdInt = parseInt(gameid);
 
     const startGame = async () => {
-      const response = await startgame({ gameid: gameIdInt, playerNames });
-      console.log("response", response);
       const imghash =
         "https://t3.ftcdn.net/jpg/02/82/23/94/360_F_282239447_9JUkxLmUPzBvOrEAXVEx2GpNd1EkPOSO.jpg";
+
+      console.log(
+        "game data",
+        gameIdInt,
+        winner.name,
+        highestKillsPlayer.kudos,
+        imghash
+      );
+      const response = await startgame({ gameid: gameIdInt, playerNames });
+      console.log("response", response);
+
       const res = await endGame({
         gameid: gameIdInt,
         winner: winner.name,
         highestkills: highestKillsPlayer.kudos,
         imghash,
       });
+
       console.log("res", res);
     };
 
