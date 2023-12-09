@@ -346,38 +346,43 @@ export default function Home() {
   }
 
   return (
-    <main className="bg-[url('https://blogger.googleusercontent.com/img/a/AVvXsEjsm98HqLPQ8EgS09Z71aY1mZ8ncQ3OlEvZsIaJGD2oE32ADUweoWL-J6GaF4VMUyLbVdmJ1wnaXyXAp9GKrtlC8Fbm-tQxn8wAF4vMt_98gph8bWvQ5M0FoF2Rd0LV8NQIN7ZkuLLvWb_0tjl-ZP33VChrjMZHB5OQVyiDH34nI1nZRXuRwB4kyGRcOn8')]   bg-contain bg-no-repeat text-white min-h-screen">
+    <main className="bg-[url('https://blogger.googleusercontent.com/img/a/AVvXsEgSANN6V5FDAtw8W0MoSSUcUfAI6qjctxQ6b3rZyPPMu4ch-9RTab_-SCpV7ePOe_N6ayCG8lptq9qHXzqsHNHxl7HebRaaza2CShQBGzrq0inZ1COg1J1Pg5h4UtUeZltr1mEX_n_ZA4H4qTO7FThCavaktq3RwGapAh2MHOwVDznY-dKR4ov7dhZYPSg')]   bg-contain bg-no-repeat text-white min-h-screen">
       <div className="bg-black min-h-screen ">
         <Navbar />
         <div className="pt-28">
-          <div className="text-center font-bold pt-5 md:pt-10 font-serif  text-xl   md:text-9xl">
-            <p>
-              Un<span className="text-[#9FC610]">l</span>eash
-              <span className="text-[#9FC610]"> t</span>he fut
-              <span className="text-[#9FC610]">u</span>re{" "}
-            </p>
-            <div className="flex justify-center">
-              <div className="flex mt-8 justify-center">
-                <p className=" border-2 border-[#9FC610] text-black text-sm md:px-2  rounded-full">
-                  .
-                </p>
-                <p className="border-t-2 mt-3 w-5  md:w-80   border-[#9FC610]  "></p>
-              </div>
-              <p className="md:text-4xl text-md md:mt-0 mt-2 text-[#9FC610] pt-5 font-serif md:ml-12">
-                join us
-              </p>
+          <div className="text-center font-bold pt-5 md:pt-5 font-serif  text-xl   md:text-9xl">
+            <div className="flex justify-between">
+              <img
+                src="https://blogger.googleusercontent.com/img/a/AVvXsEgQzzWX2Yv7Wbrsq5it0UQsl14mDTmXUQnkAm6BkhhNqZeBjreNAR6H3Ra_EJOcT6wUqeaEOlWfqkFHm-SyZJ1ko5A_vth7aUPjt7ju3M_3OhZtGQktsfZiFFuk4HOO9VO3JA69AiY0yIkfHa_cYSC-4tYAAzjh8PBWOpbPu-_MBhcnhi8uqptx-qcOiZc"
+                alt=""
+                className="h-20 w-auto"
+              />
+              <p className="herotext">BLOCKBATTLE</p>
+              <img
+                src="https://blogger.googleusercontent.com/img/a/AVvXsEg1wUR4ock3lkLd6GwFLwwaeA03b8O1O4xAPhtQMg2W9mKJt1Voiw7Ld94ruH-i3ta7f9pWOI_FmtqxzEUHm4f-cUscPTTWf8BmVIOMA4QFbbeYnXO1x2-2Y7Z3b_tcLaV9JgBK6gNpvxs906WoKWYej8RzYY3L9knZ62gmpd2gMXehiN3jOu7JWF0DHfE"
+                alt=""
+                className="h-20 w-auto"
+              />
             </div>
-            <div className="mt-5 flex justify-center space-x-4">
+
+            <div className="flex justify-center">
+              <div className="flex mx-10 md:mx-0  md:text-4xl justify-center">
+                <p>
+                  <span className="text-[#C5F404]">
+                    Decentralized Domination :
+                  </span>{" "}
+                  Command Your Character,
+                  <br /> Conquer the Blockchain Battlefield!
+                </p>
+              </div>
+            </div>
+            <div className="mt-5 mx-20 flex justify-between space-x-4">
               <img
                 src="https://blogger.googleusercontent.com/img/a/AVvXsEhwm8wvo0d75uUK7qADGTsYREvEE0E2CH7XYM-_6INqEfIfO-OxsXx_yst9etVWcY36h1RHLlP6oOa7Krub-3DxH8aShC8VVJiQ0wPXAVzYhF5UJQx9KLpXseRf2vBoN9R5Id3NqQyMypTORnKPRwOKdh3zWZ2IxmoswxZNLDxN_GAuIw7j1hhv780HU-A"
                 alt=""
                 className="h-14 w-auto md:h-auto"
               />
-              <div className="flex flex-col space-y-2">
-                <p>
-                  o<span className="text-[#9FC610]">f</span> Ga
-                  <span className="text-[#9FC610]">m</span>ing
-                </p>
+              <div className="flex ">
                 <div>
                   <button
                     onClick={reg}
@@ -388,29 +393,17 @@ export default function Home() {
                 </div>
               </div>
               <img
-                src="https://blogger.googleusercontent.com/img/a/AVvXsEh1dHNAY4W4MI43iyLovJU2odsRcgAhYdF0ZoBmhqVtABSGzoWKTTBtEZwvp3GdUvQsXm-SVPuknlqo1zE_soRClWu_CbJsrcisWU_fR_d8c-Jb8EWneLBPmcz4PUHXT0kvgV5c1kGF34HB_sSX3IUuFB9RaM9ipUjr5F0CkxTm-_av64iI9mT8RWMCNio"
+                src="https://blogger.googleusercontent.com/img/a/AVvXsEgz6-KqO7JJnjiajuTzrfyEHzgtMEgiaZ-b6wO3NukP89dKfqVRMVg0d1ENDpE0b5KoXuREAHN6syJjBlqTXBTFkWOxAthRZp0ofDSQPZi3Yn7_UbZWNK-GoA43pzSOaqnDkywnRy5rpwaqtewiIbsBbSLNzQN5f6RjR6GRSjBKpY4SsGUAIFj2XRP15dE"
                 alt=""
-                className="w-auto h-10 md:h-32"
+                className="w-auto  rotate-45	 h-10 md:h-60"
               />
             </div>
           </div>
-          <div className="flex justify-end md:mx-10">
-            <img
-              src="https://blogger.googleusercontent.com/img/a/AVvXsEgYDnRdQS_te0YbrIdK2D1nGL5EPPaN0pjRJr-3TUUM1Zc6IQbcX48JnToqKyE2wTjkCKck1ekwvHK1-npja4ZAi1VvuZiWvwIzYl8ZXq7Z6ssdgJ-Fxws8gK7AUBLdaQUxw2-8NjR7ic5Rp0r1xxB_gKbVATKIU_mNnhJ5xZFrNut9dTSR5yveEuZ5TOc"
-              className="md:h-24 h-10 w-auto"
-              alt=""
-            />
-            <img
-              src="https://blogger.googleusercontent.com/img/a/AVvXsEiuisYlXkkqkbbXoNz1Kx4O4nJ1W0dA9SieLrKYPlh9voP6DGSKQIvoeHosvTGbfn7IhQunm3HSabAKnRiu7F72H6gMommymE2LMqty5jtVgaRbW7sRXn2Ki8AyB2-sIKw0Fct7iE4-ygFyWVv1QaJHjkyepM1rtLoN9h5AvumypZMyrXwId80tqCCAwm0"
-              alt=""
-              className="md:h-12 h-8 mt-5 md:mt-16 w-auto"
-            />
-            <img
-              src="https://blogger.googleusercontent.com/img/a/AVvXsEjqPuMLzaPaHpJ5DKseyJbTjXVqAD1h8cwbkV9HCEb00rGSuzzAxhWqCqO-uI7ODczHqPBz0M2kb4K4kkvpR316wUSyAYFTFQh4-yGq9e4J5vjhOiz32VvLR2r_DGbL8nC1-3BseboiyB9TgDEoOTZQ1gBPmuNpA6BGoAzydjviNW0DoH7T0WCxSvp5Y40"
-              alt=""
-              className="md:h-8 md:mt-8 h-4 w-auto"
-            />
-          </div>
+        </div>
+        <div className="text-[#CDFF00] text-center md:my-40 mt-10  text-xl md:text-[180px]">
+          <span className="glow1">NEXT</span>{" "}
+          <span className="glow2 font-semibold">GEN</span>
+          <span className="glow3 font-extrabold"> NOW</span>
         </div>
         <div className="flex flex-col  md:flex-row md:space-x-16 mx-5 md:mx-32 mt-20">
           <div className="flex  md:space-x-8 border-2 border-r-4 border-b-8 border-[#9FC610] px-5 md:px-20 py-5 rounded-xl md:rounded-full">
@@ -455,7 +448,7 @@ export default function Home() {
           </div>
         </div>
         <div className="flex md:flex-row space-y-5 md:space-y-0 flex-col mx-5 md:mx-0 justify-center  md:space-x-20">
-          <div className="  md:mt-24">
+          <div className="  md:mt-32">
             <div className="border-2 mt-3 md:mt-0 mx-20 md:mx-0 border-[#9FC610] flex flex-col md:space-y-3 items-center border-r-8 border-b-4 px-16 py-10 rounded-full">
               <img
                 src="https://blogger.googleusercontent.com/img/a/AVvXsEgYDnRdQS_te0YbrIdK2D1nGL5EPPaN0pjRJr-3TUUM1Zc6IQbcX48JnToqKyE2wTjkCKck1ekwvHK1-npja4ZAi1VvuZiWvwIzYl8ZXq7Z6ssdgJ-Fxws8gK7AUBLdaQUxw2-8NjR7ic5Rp0r1xxB_gKbVATKIU_mNnhJ5xZFrNut9dTSR5yveEuZ5TOc"
@@ -463,27 +456,27 @@ export default function Home() {
                 className="md:h-12 h-8 w-auto"
               />
               <p className="md:text-xl text-sm text-center">
-                Blockchain
+                Intense
                 <br />
-                Powered
+                Multiplayer
                 <br />
-                Realism
+                Showdowns
               </p>
             </div>
           </div>
           <div className="md:mt-16">
-            <div className="border-2 mt-3 md:mt-0 mx-20 md:mx-0 border-[#9FC610] flex flex-col md:space-y-3 items-center border-r-8 border-b-4 px-16 py-10 rounded-full">
+            <div className="border-2  md:mt-20 mx-20 md:mx-0 border-[#9FC610] flex flex-col md:space-y-3 items-center border-r-8 border-b-4 px-16 py-10 rounded-full">
               <img
                 src="https://blogger.googleusercontent.com/img/a/AVvXsEgYDnRdQS_te0YbrIdK2D1nGL5EPPaN0pjRJr-3TUUM1Zc6IQbcX48JnToqKyE2wTjkCKck1ekwvHK1-npja4ZAi1VvuZiWvwIzYl8ZXq7Z6ssdgJ-Fxws8gK7AUBLdaQUxw2-8NjR7ic5Rp0r1xxB_gKbVATKIU_mNnhJ5xZFrNut9dTSR5yveEuZ5TOc"
                 alt=""
                 className="md:h-12 h-8 w-auto"
               />
               <p className="md:text-xl text-sm text-center">
-                Blockchain
+                Dynamic
                 <br />
-                Powered
+                Timer-driven
                 <br />
-                Realism
+                Challenges{" "}
               </p>
             </div>
           </div>
@@ -495,11 +488,10 @@ export default function Home() {
                 className="md:h-12 h-8 w-auto"
               />
               <p className="md:text-xl text-sm text-center">
-                Blockchain
+                NFT Rewards
+                <br />&
                 <br />
-                Powered
-                <br />
-                Realism
+                Leaderboard
               </p>
             </div>
           </div>
@@ -586,8 +578,8 @@ export default function Home() {
         </div>
         <div className="flex  md:flex-row flex-col mt-10 md:mt-0 md:mx-52   justify-between space-x-3">
           <img
-            className="h-60  w-auto"
-            src="https://blogger.googleusercontent.com/img/a/AVvXsEi3r82ZGR4zoDRFFTVKnylk8xMoij_iirupnCQoWjJO-btuNQ6xZa7tDjBG89ExvCxmWKyT0WiQwlrLxLph2MipBiwh9Rx5v6OYnmgF8AS7JuF6FK4rYdF2R-HQdCJSO8TD7yQMVsNC0C_nUuOwZUV5NwYTN0NLGFJPYew2_vZCIMg-pCVRHNa2ymeGlKg"
+            className="md:h-60 h-40  w-auto"
+            src="https://blogger.googleusercontent.com/img/a/AVvXsEjGxp02ByIDTr8MCj2zorW34gqPq0NL7yQN539S5AABjJGmxXlVLT9wEPeWhm1FIghikmRu4qy_CHnm88S9IzByI89pJGvSX3Y1xkunm6OPMMSHFyoryvThC2BC-4aUbT6E4K_lF_DL1LdHw6PxRDITLY_1plZppnpDLcJEKgimGhXZVEExdUfYazxqDi4"
             alt=""
           />
 

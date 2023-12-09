@@ -27,8 +27,12 @@ function Navbar() {
         >
           <div className="flex space-x-4 lg:flex-1">
             <Link href="/" className="flex space-x-4">
-              <img className="h-16 w-auto" src="" alt="" />
-              <p className=" text-xl mt-5 md:mt-2 md:text-2xl font-bold font-serif ">
+              <img
+                className="h-16 w-auto"
+                src="https://blogger.googleusercontent.com/img/a/AVvXsEgab_EWB7_IQbqmQAMhbmddsxfjqV31Bd7MoXURME_mvITfAyNJ2-D_AVewslaXvHC8ltuqi4oLrDdHdWPvG4YgLTaxz_bBE0h5C4XR196sWWp6Ef91piik7praKYcM4WcbgL7mXmOdWbBZ67JLPD6SqvID_tiP1ml2Wqf8CdQv87QpJ_KWare6aMe5ugI"
+                alt=""
+              />
+              <p className=" text-xl mt-8 md:mt-2 md:text-2xl font-bold font-serif ">
                 BLOCKBATTLE
               </p>
             </Link>
