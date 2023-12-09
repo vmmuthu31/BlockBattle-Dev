@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSomeValue } from "../../store/yourSlice";
 import { useAccount } from "wagmi";
 import { getPlayerData } from "../config/BlockchainServices";
+import { setgameid } from "../../store/connection";
+
 const getRoomIdFromURL = () => {
   const hash = window.location.hash;
   const roomId = hash.split("=")[1]; // Split the hash by '=' and get the second part
@@ -15,15 +17,16 @@ export const Leaderboard = () => {
   const players = usePlayersList(true);
   const [timer, setTimer] = useState(60); // Initial timer value in seconds (5 minutes)
   const dispatch = useDispatch();
-  const someValue = useSelector((state) => state.yourSlice.someValue);
-  const handleButtonClick = () => {
-    dispatch(setSomeValue(players));
-  };
-  const [roomId, setRoomId] = useState("");
-
   useEffect(() => {
     setRoomId(getRoomIdFromURL());
   }, [window.location.hash]);
+  const [roomId, setRoomId] = useState("");
+  const someValue = useSelector((state) => state.yourSlice.someValue);
+  const handleButtonClick = () => {
+    dispatch(setSomeValue(players));
+    dispatch(setgameid(roomId));
+  };
+
   console.log("room id", roomId);
   console.log("players data", players);
 

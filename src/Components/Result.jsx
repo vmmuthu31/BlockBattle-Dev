@@ -9,16 +9,32 @@ import Loading from "./Loading";
 const Result = () => {
   const connection = useSelector((state) => state.connection);
   const { isLoading } = useWaku();
+  const [playerNames, setPlayerNames] = useState([]);
+
   console.log("Provider:", connection?.provider);
   console.log("Address:", connection?.address);
   if (isLoading) {
     return <Loading />;
   }
-  const navigateTo = useNavigate();
-
   const someValue = useSelector((state) => state.yourSlice.someValue);
-
   const room = someValue[0].id;
+  const gameid = useSelector((state) => state.gameid.id);
+  console.log("gameid", gameid);
+  useEffect(() => {
+    fetch(
+      `https://blockbattle-backend.vercel.app/auth/getGamePlayers/${gameid}`
+    )
+      .then((response) => response.json())
+      .then((players) => {
+        const playerNames = players.map((player) => player.name);
+
+        console.log("Game player names:", playerNames);
+
+        setPlayerNames(playerNames);
+      })
+      .catch((error) => console.error("Error fetching players:", error));
+  }, [gameid]);
+
   const [applyed, setApplyed] = useState(false);
   const [myrank, setrank] = useState(false);
 
