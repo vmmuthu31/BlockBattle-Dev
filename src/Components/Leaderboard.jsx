@@ -17,7 +17,7 @@ export const Leaderboard = () => {
   const dispatch = useDispatch();
   const someValue = useSelector((state) => state.yourSlice.someValue);
   const handleButtonClick = () => {
-    dispatch(setSomeValue(roomId));
+    dispatch(setSomeValue(players));
   };
   const [roomId, setRoomId] = useState("");
 

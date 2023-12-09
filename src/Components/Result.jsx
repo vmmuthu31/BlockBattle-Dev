@@ -18,7 +18,7 @@ const Result = () => {
 
   const someValue = useSelector((state) => state.yourSlice.someValue);
 
-  const room = someValue;
+  const room = someValue[0].id;
   const [applyed, setApplyed] = useState(false);
   const [myrank, setrank] = useState(false);
 
@@ -27,11 +27,11 @@ const Result = () => {
     var team = someValue.map((someValue, index) => {
       return {
         rank: index + 1,
-        name: someValue.state.profile.name,
+        name: someValue?.state?.profile?.name,
         handle: "lewishamilton", // Replace with the actual handle if available in your data
-        img: someValue.state.profile.photo,
-        kudos: someValue.state.kills,
-        deaths: someValue.state.deaths,
+        img: someValue?.state?.profile?.photo,
+        kudos: someValue?.state?.kills,
+        deaths: someValue?.state?.deaths,
         sent: 31,
       };
     });
@@ -147,12 +147,12 @@ const Result = () => {
                   <div className="u-display--flex u-justify--space-between">
                     <div className="u-text--left">
                       <div className="u-text--small">Room</div>
-                      <h1>{someValue}</h1>
+                      <h1>{someValue[0]?.id}</h1>
                     </div>
                     <div className="u-text--right">
                       <div className="u-text--small">Total bedding</div>
                       <h2>
-                        {someValue}/{someValue}
+                        {someValue?.kills}/{someValue?.deaths}
                       </h2>
                     </div>
                   </div>
@@ -169,7 +169,9 @@ const Result = () => {
                 <div className="c-card__header">
                   <h3>Rank</h3>
                   <select className="c-select">
-                    <option selected="selected">RoomId : {someValue}</option>
+                    <option selected="selected">
+                      RoomId : {someValue[0]?.id}
+                    </option>
                   </select>
                 </div>
                 <div className="c-card__body">
