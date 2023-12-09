@@ -5,13 +5,20 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ContentPairProvider, useWaku } from "@waku/react";
 import Loading from "./Loading";
-import { endGame, startgame } from "../config/BlockchainServices";
+import {
+  endGame,
+  getPlayerData,
+  startgame,
+} from "../config/BlockchainServices";
+import { useAccount } from "wagmi";
 
 const Result = () => {
   const connection = useSelector((state) => state.connection);
   const { isLoading } = useWaku();
   const [playerNames, setPlayerNames] = useState([]);
   const [team, setTeam] = useState([]);
+
+  const { address, isConnected } = useAccount();
 
   console.log("Provider:", connection?.provider);
   console.log("Address:", connection?.address);
@@ -26,7 +33,9 @@ const Result = () => {
     )
       .then((response) => response.json())
       .then((players) => {
-        const playerNames = players.map((player) => player.name);
+        const playerNames = players
+          .filter((player) => player.name && player.name.trim() !== "") // Filter out players with undefined or empty names
+          .map((player) => player.name);
 
         console.log("Game player names:", playerNames);
 
@@ -34,6 +43,7 @@ const Result = () => {
       })
       .catch((error) => console.error("Error fetching players:", error));
   }, [gameid]);
+
   useEffect(() => {
     const sortedTeam = someValue
       .map((value, index) => ({
@@ -49,8 +59,23 @@ const Result = () => {
 
     setTeam(sortedTeam);
   }, [someValue]);
-
+  const [playerdata, setPlayerdata] = useState("");
+  console.log("Player Name", playerdata[0]);
+  useEffect(() => {
+    async function getplayere() {
+      const res = await getPlayerData({ playerAddress });
+      console.log("getPlayerData response:", res);
+      setPlayerdata(res);
+    }
+    getplayere();
+  }, [address]);
   console.log("team", team);
+  useEffect(() => {
+    if (playerdata) {
+      console.log("playerdata[0] from blockchain:", playerdata[0]);
+    }
+  }, [playerdata]);
+
   useEffect(() => {
     const winner = team[0];
     const highestKillsPlayer = team[0];
@@ -72,7 +97,7 @@ const Result = () => {
 
       const res = await endGame({
         gameid: gameIdInt,
-        winner: winner.name,
+        winner: playerdata[0],
         highestkills: highestKillsPlayer.kudos,
         imghash,
       });
