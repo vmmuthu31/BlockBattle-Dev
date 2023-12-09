@@ -400,7 +400,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="text-[#CDFF00] text-center md:my-40 mt-10  text-xl md:text-[180px]">
+        <div className="text-[#CDFF00] text-center md:my-40 mt-10  text-xl md:text-[160px]">
           <span className="glow1">NEXT</span>{" "}
           <span className="glow2 font-semibold">GEN</span>
           <span className="glow3 font-extrabold"> NOW</span>
