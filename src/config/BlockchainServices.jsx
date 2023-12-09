@@ -107,14 +107,14 @@ export const addvechileassets = async ({
   return tokenId;
 };
 
-export const startgame = async ({ gameid, gameplayers }) => {
+export const startgame = async ({ gameid, playerNames }) => {
   const provider =
     window.ethereum != null
       ? new ethers.providers.Web3Provider(window.ethereum)
       : ethers.providers.getDefaultProvider();
   const signer = provider.getSigner();
   const Role = new ethers.Contract(ContractADD, ABI, signer);
-  const tokenId = await Role.startGame(gameid, gameplayers);
+  const tokenId = await Role.startGame(gameid, playerNames);
   return tokenId;
 };
 

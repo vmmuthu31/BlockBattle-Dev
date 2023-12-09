@@ -34,27 +34,26 @@ export const Leaderboard = () => {
   const playerAddress = address;
   console.log("add", address);
   const [playerdata, setPlayerdata] = useState("");
+  console.log("Player Name", playerdata[0]);
 
-  const addPlayerToGame = () => {
-    fetch("https://blockbattle-backend.vercel.app/auth/addPlayer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        gameId: roomId,
-        userId: playerdata[4],
-        name: playerdata[0],
-      }),
-    })
-      .then((response) => response.text())
-      .then((data) => console.log(data))
-      .catch((error) => console.error("Error adding player:", error));
-  };
   useEffect(() => {
-    if (playerdata[0]) {
-      addPlayerToGame();
-    }
+    const addPlayerToGame = () => {
+      fetch("https://blockbattle-backend.vercel.app/auth/addPlayer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          gameId: roomId,
+          userId: playerdata[4],
+          name: playerdata[0],
+        }),
+      })
+        .then((response) => response.text())
+        .then((data) => console.log(data))
+        .catch((error) => console.error("Error adding player:", error));
+    };
+    addPlayerToGame();
   }, [playerdata, roomId]);
 
   const navigate = useNavigate();

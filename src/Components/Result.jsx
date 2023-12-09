@@ -5,17 +5,17 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ContentPairProvider, useWaku } from "@waku/react";
 import Loading from "./Loading";
+import { endGame, startgame } from "../config/BlockchainServices";
 
 const Result = () => {
   const connection = useSelector((state) => state.connection);
   const { isLoading } = useWaku();
   const [playerNames, setPlayerNames] = useState([]);
+  const [team, setTeam] = useState([]);
 
   console.log("Provider:", connection?.provider);
   console.log("Address:", connection?.address);
-  if (isLoading) {
-    return <Loading />;
-  }
+
   const someValue = useSelector((state) => state.yourSlice.someValue);
   const room = someValue[0].id;
   const gameid = useSelector((state) => state.gameid.id);
@@ -34,6 +34,44 @@ const Result = () => {
       })
       .catch((error) => console.error("Error fetching players:", error));
   }, [gameid]);
+  useEffect(() => {
+    const sortedTeam = someValue
+      .map((value, index) => ({
+        rank: index + 1,
+        name: value.state.profile.name,
+        handle: "lewishamilton",
+        img: value.state.profile.photo,
+        kudos: value.state.kills,
+        deaths: value.state.deaths,
+        sent: 31,
+      }))
+      .sort((a, b) => b.kudos - a.kudos);
+
+    setTeam(sortedTeam);
+  }, [someValue]);
+
+  console.log("team", team);
+  useEffect(() => {
+    const winner = team[0];
+    const highestKillsPlayer = team[0];
+    const gameIdInt = parseInt(gameid);
+
+    const startGame = async () => {
+      const response = await startgame({ gameid: gameIdInt, playerNames });
+      console.log("response", response);
+      const imghash =
+        "https://t3.ftcdn.net/jpg/02/82/23/94/360_F_282239447_9JUkxLmUPzBvOrEAXVEx2GpNd1EkPOSO.jpg";
+      const res = await endGame({
+        gameid: gameIdInt,
+        winner: winner.name,
+        highestkills: highestKillsPlayer.kudos,
+        imghash,
+      });
+      console.log("res", res);
+    };
+
+    startGame();
+  }, [team, playerNames, gameid]);
 
   const [applyed, setApplyed] = useState(false);
   const [myrank, setrank] = useState(false);
