@@ -39,7 +39,6 @@ app.post("/addPlayer", async (req, res) => {
   }
 });
 
-// Endpoint to get all players of a game
 app.get("/getGamePlayers/:gameId", async (req, res) => {
   const { gameId } = req.params;
   const game = await Game.findOne({ gameId });
@@ -48,6 +47,12 @@ app.get("/getGamePlayers/:gameId", async (req, res) => {
   } else {
     res.status(404).send("Game not found");
   }
+});
+
+app.get("/", (req, res) => {
+  res.json({
+    message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄",
+  });
 });
 
 const PORT = 5000;
