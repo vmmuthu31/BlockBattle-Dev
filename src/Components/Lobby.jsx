@@ -23,7 +23,7 @@ function Lobby() {
 
   return (
     <>
-      <div className="bg-[url('https://blogger.googleusercontent.com/img/a/AVvXsEhnD6k83f7VLrtmGoYKcqJk_lSnWZwgDl-Fgz3RTsKgatlb276B0QhB3xi_mEl7jsRIVgUxASTVenCDoqXju-Q2YfCi__LT70OcLJjYgbl8AE1tcqPdHGYCUgzUuUI5DN5J9hQBHSVyb9AA_BZSwfaZXL-RxvvIRtqT3P0jsV1YzD_rb62S9reTOCxg24k')] min-h-screen  bg-no-repeat bg-cover">
+      <div className="bg-[url('https://blogger.googleusercontent.com/img/a/AVvXsEicOwCW7fWeZ9xLNlLeabY6YZaSndKriwzi7evh6saDDipcRL4_3PjstCbRj-XX8D4T94t_9_R9I7tFVTfp7cUkLDQ-KsxGkuLcTO5o2YjSbhx4P_l-ejYi1S_MjsOv_YVTYwve1iMn6LsmZiinZFCxxCCXOyoOITRutiSjyNkBwDUAML9ZHMgsILPAzTo')] min-h-screen  bg-no-repeat bg-cover">
         <div className="flex items-center space-x-11 text-white text-xl mx-20 py-8">
           <div className="flex homeprofilebg px-3 py-2 items-center space-x-3">
             <img
@@ -65,14 +65,14 @@ function Lobby() {
                   <Link href="/optstore">Store</Link>
                 </p>
               </div>
-              <div className="flex items-center my-5 space-x-5">
+              <div className="flex items-center my-10 space-x-5">
                 <img
                   src="https://blogger.googleusercontent.com/img/a/AVvXsEgn6Znvl2a2HObGhEoqPyeJymSTwEqIxV8f7IIQK3sCnu7oyYtZCkSg4XB-SRkV7NaxN7OVjliWj7gsOcc9VFmULUPaex4K3A1oEWf6wNsLfa8y9CcwLEdA52Dh-Hl2OnevhWJVJlI7CAMUpnWT97KEO42TfPhAxgHi7umyV4vGcVoO_XTnyxpNyJasnPg"
                   alt=""
                   className="h-8 w-auto"
                 />
                 <p>
-                  <Link href="/optstore">Luck Royale</Link>
+                  <Link href="/optstore">LuckRoyale</Link>
                 </p>
               </div>
               <div className="flex items-center space-x-5">
@@ -110,7 +110,7 @@ function Lobby() {
                 alt=""
               />
               <div className="absolute   top-[525px]">
-                <p className="text-center  bg-black bg-opacity-40 py-2 px-[90px]">
+                <p className="text-center  bg-black bg-opacity-40 py-2 px-[80px]">
                   Bermuda
                 </p>
               </div>

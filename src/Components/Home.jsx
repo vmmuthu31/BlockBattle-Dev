@@ -346,7 +346,7 @@ export default function Home() {
   }
 
   return (
-    <main className="bg-[url('https://blogger.googleusercontent.com/img/a/AVvXsEgSANN6V5FDAtw8W0MoSSUcUfAI6qjctxQ6b3rZyPPMu4ch-9RTab_-SCpV7ePOe_N6ayCG8lptq9qHXzqsHNHxl7HebRaaza2CShQBGzrq0inZ1COg1J1Pg5h4UtUeZltr1mEX_n_ZA4H4qTO7FThCavaktq3RwGapAh2MHOwVDznY-dKR4ov7dhZYPSg')]   bg-contain bg-no-repeat text-white min-h-screen">
+    <main className="bg-[url('https://blogger.googleusercontent.com/img/a/AVvXsEh7NNiHgAzWXZnrnTeAbIX3yoc5pOvv5JHOuQvMUyxTwEz3fzXaBC9NCusmkULXVQfIVCqEkTkJbLhkRdI24jASgAA-i6UuboaaCTSK6F6dehfB7tusiLaQYRzqkywaBWJjz0k5ZrdpsJWWhju9BIEAz7QeODOxadQgS-_l-ImuyUVLPAuZRDt6iiILGzY')]   bg-contain bg-no-repeat text-white min-h-screen">
       <div className="bg-black min-h-screen ">
         <Navbar />
         <div className="pt-28">
