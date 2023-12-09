@@ -6,6 +6,14 @@ import { useEffect, useRef, useState } from "react";
 import { CharacterSoldier } from "./CharacterSoldier";
 import { getPlayerData } from "../config/BlockchainServices";
 import { useAccount } from "wagmi";
+import {
+  useWaku,
+  useContentPair,
+  useLightPush,
+  useStoreMessages,
+  useFilterMessages,
+} from "@waku/react";
+import protobuf from "protobufjs";
 
 const MOVEMENT_SPEED = 202;
 const FIRE_RATE = 380;
@@ -34,6 +42,11 @@ const WEAPONS = [
   "Sniper_2",
 ];
 
+const ChatMessage = new protobuf.Type("ChatMessage")
+  .add(new protobuf.Field("timestamp", 1, "uint64"))
+  .add(new protobuf.Field("sender", 2, "string"))
+  .add(new protobuf.Field("message", 3, "string"));
+
 export const CharacterController = ({
   state,
   joystick,
@@ -44,7 +57,14 @@ export const CharacterController = ({
   ...props
 }) => {
   const [weapon, setWeapon] = useState("AK");
-
+  const { node } = useWaku();
+  const { decoder, encoder } = useContentPair();
+  const { messages: storeMessages } = useStoreMessages({
+    node,
+    decoder,
+  });
+  const { messages: filterMessages } = useFilterMessages({ node, decoder });
+  const { push } = useLightPush({ node, encoder });
   console.log("useState call :", weapon);
   const group = useRef();
   const character = useRef();
@@ -66,7 +86,20 @@ export const CharacterController = ({
     const spawnPos = spawns[Math.floor(Math.random() * spawns.length)].position;
     rigidbody.current.setTranslation(spawnPos);
   };
-
+  async function sendMessage(sender, message) {
+    const protoMessage = ChatMessage.create({
+      timestamp: Date.now(),
+      sender,
+      message,
+    });
+    const serialisedMessage = ChatMessage.encode(protoMessage).finish();
+    const timestamp = new Date();
+    await push({
+      payload: serialisedMessage,
+      timestamp,
+    });
+    console.log("MESSAGE PUSHED");
+  }
   useEffect(() => {
     if (isHost()) {
       spawnRandomly();
@@ -172,6 +205,16 @@ export const CharacterController = ({
 
     if (isHost()) {
       state.setState("pos", rigidbody.current.translation());
+      const playerState = {
+        id: state.id,
+        position: rigidbody.current.translation(),
+        Angle: angle,
+        player: state.id,
+        xdirection: Math.sin(angle) * MOVEMENT_SPEED * delta,
+        ydirection: JUMP_FORCE,
+        zdirection: Math.cos(angle) * MOVEMENT_SPEED * delta,
+      };
+      sendMessage("playerState", JSON.stringify(playerState));
     } else {
       const pos = state.getState("pos");
       if (pos) {
