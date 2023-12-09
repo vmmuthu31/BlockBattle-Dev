@@ -28,7 +28,7 @@ const Result = () => {
       return {
         rank: index + 1,
         name: someValue.state.profile.name,
-        handle: "lewishamilton", // Replace with the actual handle if available in your data
+        handle: "lewishamilton",
         img: someValue.state.profile.photo,
         kudos: someValue.state.kills,
         deaths: someValue.state.deaths,

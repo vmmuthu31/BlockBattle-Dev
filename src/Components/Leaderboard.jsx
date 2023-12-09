@@ -26,19 +26,34 @@ export const Leaderboard = () => {
   }, [window.location.hash]);
   console.log("room id", roomId);
   console.log("players data", players);
+
   const { address, isConnected } = useAccount();
   const playerAddress = address;
   console.log("add", address);
   const [playerdata, setPlayerdata] = useState("");
+
+  const addPlayerToGame = () => {
+    fetch("http://localhost:5000/addPlayer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        gameId: roomId,
+        userId: playerdata[4],
+        name: playerdata[0],
+      }),
+    })
+      .then((response) => response.text())
+      .then((data) => console.log(data))
+      .catch((error) => console.error("Error adding player:", error));
+  };
   useEffect(() => {
-    async function getplayere() {
-      const res = await getPlayerData({ playerAddress });
-      console.log("res", res);
-      setPlayerdata(res);
+    if (playerdata[0]) {
+      addPlayerToGame();
     }
-    getplayere();
-  }, [address]);
-  console.log("playername", playerdata[0]);
+  }, [playerdata, roomId]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -111,6 +126,40 @@ export const Leaderboard = () => {
       remainingSeconds
     ).padStart(2, "0")}`;
   };
+  useEffect(() => {
+    async function getplayere() {
+      const res = await getPlayerData({ playerAddress });
+      console.log("getPlayerData response:", res); // Log to see the response
+      setPlayerdata(res);
+    }
+    getplayere();
+  }, [address]);
+
+  useEffect(() => {
+    if (playerdata) {
+      console.log("playerdata[0] from blockchain:", playerdata[0]); // Check if playerdata[0] is correctly set
+    }
+  }, [playerdata]);
+
+  const updatedPlayers = players.map((player, index) => {
+    if (index === players.length - 1 && playerdata) {
+      console.log("Updating player name to:", playerdata[0]); // Log to check if this block is executed
+      return {
+        ...player,
+        state: {
+          ...player.state,
+          profile: {
+            ...player.state.profile,
+            name: playerdata[0] || player.state.profile.name, // Update name
+          },
+        },
+      };
+    } else {
+      return player;
+    }
+  });
+
+  console.log("updated players array", updatedPlayers);
 
   return (
     <>
@@ -140,7 +189,7 @@ export const Leaderboard = () => {
           </p>
         </div>
 
-        {players.map((player) => (
+        {updatedPlayers.map((player) => (
           <div
             key={player.id}
             className={`bg-opacity-60 backdrop-blur-sm flex items-center rounded-lg gap-2 p-2 min-w-[140px]`}
@@ -155,7 +204,7 @@ export const Leaderboard = () => {
             />
             <div className="flex-grow">
               <h2 className={`font-bold text-sm`}>
-                {player.state.profile.name ? playerdata[0] : "Loading..."}
+                {player.state.profile.name}
               </h2>
 
               <div className="flex text-sm items-center gap-4">
