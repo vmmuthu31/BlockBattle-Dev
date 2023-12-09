@@ -6,11 +6,17 @@ import axios from "axios";
 
 import { useRoom } from "@huddle01/react/hooks";
 import { AccessToken, Role } from "@huddle01/server-sdk/auth";
-import { useLocalVideo, useLocalAudio } from "@huddle01/react/hooks";
+import {
+  useLocalVideo,
+  useLocalAudio,
+  usePeerIds,
+} from "@huddle01/react/hooks";
 
-import { setSomeValue } from "../../store/yourSlice";
+// import { setSomeValue } from "../../store/yourSlice";
 import { useAccount } from "wagmi";
 import { getPlayerData } from "../config/BlockchainServices";
+
+import RemotePeer from "./RemotePeer";
 const getRoomIdFromURL = () => {
   const hash = window.location.hash;
   const roomId = hash.split("=")[1]; // Split the hash by '=' and get the second part
@@ -21,22 +27,24 @@ export const Leaderboard = () => {
   const players = usePlayersList(true);
   const [timer, setTimer] = useState(60); // Initial timer value in seconds (5 minutes)
   const dispatch = useDispatch();
-  const someValue = useSelector((state) => state.yourSlice.someValue);
-  const handleButtonClick = () => {
-    dispatch(setSomeValue(players));
-  };
+  // const someValue = useSelector((state) => state.yourSlice.someValue);
+  // const handleButtonClick = () => {
+  //   dispatch(setSomeValue(players));
+  // };
   const [roomId, setRoomId] = useState("");
 
   const [huddleRoomID, setHuddleRoomID] = useState("");
 
   const [huddleToken, setHuddleToken] = useState("");
+  const { peerIds } = usePeerIds();
 
   const [joinData, setJoinData] = useState({
     token: huddleToken,
     roomId: huddleRoomID,
   });
-  // const { stream, enableAudio, disableAudio, changeVideoSource } = useLocalAudio();
-  const { enableAudio, isAudioOn, stream: audioStream } = useLocalAudio();
+  const { stream, enableAudio, disableAudio, changeVideoSource } =
+    useLocalAudio();
+  // const { enableAudio, isAudioOn, stream: audioStream } = useLocalAudio();
 
   const { joinRoom } = useRoom({
     // Triggered when joinRoom() method calls
@@ -69,7 +77,7 @@ export const Leaderboard = () => {
   const createAccessToken = async () => {
     const accessToken = new AccessToken({
       apiKey: "5t0VTzU1IVTBm74AYyzWPRpRkCbv6M-r",
-      roomId: huddleRoomID,
+      roomId: "aoi-lqtl-ibs",
       role: Role.HOST,
       permissions: {
         admin: true,
@@ -84,12 +92,6 @@ export const Leaderboard = () => {
         canSendData: true,
         canUpdateMetadata: true,
       },
-      options: {
-        metadata: {
-          // you can add any custom attributes here which you want to associate with the user
-          walletAddress: "axit.eth",
-        },
-      },
     });
 
     const tempToken = await accessToken.toJwt();
@@ -103,9 +105,8 @@ export const Leaderboard = () => {
 
   const handleJoinRoom = async () => {
     await joinRoom({
-      roomId: "uyi-plwt-poa",
-      token:
-        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb29tSWQiOiJ1eWktcGx3dC1wb2EiLCJyb2xlIjoiaG9zdCIsInBlcm1pc3Npb25zIjp7ImFkbWluIjp0cnVlLCJjYW5Db25zdW1lIjp0cnVlLCJjYW5Qcm9kdWNlIjp0cnVlLCJjYW5Qcm9kdWNlU291cmNlcyI6eyJjYW0iOnRydWUsIm1pYyI6dHJ1ZSwic2NyZWVuIjp0cnVlfSwiY2FuU2VuZERhdGEiOnRydWUsImNhblJlY3ZEYXRhIjp0cnVlLCJjYW5VcGRhdGVNZXRhZGF0YSI6dHJ1ZX0sIm1ldGFkYXRhIjoie1wid2FsbGV0QWRkcmVzc1wiOlwiYXhpdC5ldGhcIn0iLCJwZWVySWQiOiJwZWVySWQtMVhtOFctV1puZUtNa0VRaWptU1ViIiwicHVycG9zZSI6IlNESyIsInJvb21JbmZvIjp7InJvb21Mb2NrZWQiOmZhbHNlLCJtdXRlT25FbnRyeSI6ZmFsc2UsInJvb21UeXBlIjoiVklERU8iLCJ2aWRlb09uRW50cnkiOmZhbHNlfSwiaWF0IjoxNzAyMTIwMTY5LCJleHAiOjE3MDIxMzA5NjksImlzcyI6Imh1ZGRsZTAxIn0.TcGaMuTkO9Zc3_Lczspl3KSSTT6nILlI08yBIMVDO7_zSB846MjhEQAuYdSlAlt5qZoOU0uoxiHnJCmAAWJgGTW4fInfWqHtb_R5DQ75r1yLsBTxx2grB4DTRPGhgHkM1sZiMNOtGUhoPY0esVGoraKn_DOWIas9XSaJdfy7AwqnufzA2uO-44NqWAksNb1JsqqH23qn4n9st2PA2nJ3KCoQ3sDbLLmxl3XMEUweTGpSIQdv9YVMaYJ3gzGd4Lt3_2ap2sMr-Zf652PAedbIy3GgPkI7xc11aP2Pcv5RYOwfLY7f_fJmlTCsHQsygwX1oFOflLKjJjF10NqJIJi0fSPANJXykYDkx4tcNvknnotZhFkwCbcIuF9RpMe_KGCEW-Vi5cdsfGc8DZzNvd560ylaPqsCqsjks5sgMbCQo1H-WogVGGITD0c07Tc84heXcnnIZxUrm4jrbiipyfo385CZotrvfj86feOB0q_qSKmZ4qJApIGU0lWib4E-hFaD8UV33o7uCMemVUpL7-H0Ziv0DYDpmGA-kXxuKiegfs_Mh2Cl52qYXdO7qvupj_o575Pw7byHerODX1TQ6s5W7CEdMFlOS9tZjUpX2t_80MtSOwKjefZ5-GOotlJ5YEwecs-KKwIj-jRga10hxghJ-H2kmFm5f8ooKVzQLO6W1Zs",
+      roomId: "aoi-lqtl-ibs",
+      token: huddleToken,
     });
   };
 
@@ -190,7 +191,7 @@ export const Leaderboard = () => {
         localStorage.setItem("myData", "false");
         // console.log(localStorage.getItem("myData"),typeof(localStorage.getItem("myData")))
         // console.log("game over")
-        handleButtonClick();
+        // handleButtonClick();
         // localStorage.setItem('myObject', JSON.stringify(players));
         // navigate("/result");
       }
@@ -246,6 +247,12 @@ export const Leaderboard = () => {
           >
             Enable Audio
           </button>
+
+          <div className="mt-4 mb-32 grid gap-2 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+            {peerIds.map((peerId) =>
+              peerId ? <RemotePeer key={peerId} peerId={peerId} /> : null
+            )}
+          </div>
         </div>
 
         {players.map((player) => (
