@@ -54,7 +54,7 @@ const Result = () => {
   useEffect(() => {
     const winner = team[0];
     const highestKillsPlayer = team[0];
-    const gameIdInt = parseInt(gameid);
+    const gameIdInt = gameid && /^\d/.test(gameid) ? parseInt(gameid) : 0;
 
     const startGame = async () => {
       const imghash =
