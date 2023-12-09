@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { usePlayersList } from "playroomkit";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+
+import { useRoom } from "@huddle01/react/hooks";
+import { AccessToken, Role } from "@huddle01/server-sdk/auth";
+import { useLocalVideo, useLocalAudio } from "@huddle01/react/hooks";
+
 import { setSomeValue } from "../../store/yourSlice";
 import { useAccount } from "wagmi";
 import { getPlayerData } from "../config/BlockchainServices";
@@ -21,24 +27,106 @@ export const Leaderboard = () => {
   };
   const [roomId, setRoomId] = useState("");
 
+  const [huddleRoomID, setHuddleRoomID] = useState("");
+
+  const [huddleToken, setHuddleToken] = useState("");
+
+  const [joinData, setJoinData] = useState({
+    token: huddleToken,
+    roomId: huddleRoomID,
+  });
+  // const { stream, enableAudio, disableAudio, changeVideoSource } = useLocalAudio();
+  const { enableAudio, isAudioOn, stream: audioStream } = useLocalAudio();
+
+  const { joinRoom } = useRoom({
+    // Triggered when joinRoom() method calls
+    onJoin: () => {
+      console.info("some stuff");
+    },
+  });
+
+  const createRoomId = async () => {
+    const API_KEY = "5t0VTzU1IVTBm74AYyzWPRpRkCbv6M-r";
+    const response = await axios.post(
+      "https://api.huddle01.com/api/v1/create-room",
+      {
+        title: "Huddle01-Test",
+        hostWallets: ["0x324298486F9b811eD5e062275a58363d1B2E93eB"],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "5t0VTzU1IVTBm74AYyzWPRpRkCbv6M-r",
+        },
+      }
+    );
+    alert(response);
+    console.log(response);
+    console.log(response.data.data.roomId);
+    setHuddleRoomID(response.data.data.roomId);
+  };
+
+  const createAccessToken = async () => {
+    const accessToken = new AccessToken({
+      apiKey: "5t0VTzU1IVTBm74AYyzWPRpRkCbv6M-r",
+      roomId: huddleRoomID,
+      role: Role.HOST,
+      permissions: {
+        admin: true,
+        canConsume: true,
+        canProduce: true,
+        canProduceSources: {
+          cam: true,
+          mic: true,
+          screen: true,
+        },
+        canRecvData: true,
+        canSendData: true,
+        canUpdateMetadata: true,
+      },
+      options: {
+        metadata: {
+          // you can add any custom attributes here which you want to associate with the user
+          walletAddress: "axit.eth",
+        },
+      },
+    });
+
+    const tempToken = await accessToken.toJwt();
+
+    console.log(tempToken, "temptoken");
+
+    setHuddleToken(tempToken);
+
+    setJoinData((prev) => ({ ...prev, token: tempToken }));
+  };
+
+  const handleJoinRoom = async () => {
+    await joinRoom({
+      roomId: "uyi-plwt-poa",
+      token:
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb29tSWQiOiJ1eWktcGx3dC1wb2EiLCJyb2xlIjoiaG9zdCIsInBlcm1pc3Npb25zIjp7ImFkbWluIjp0cnVlLCJjYW5Db25zdW1lIjp0cnVlLCJjYW5Qcm9kdWNlIjp0cnVlLCJjYW5Qcm9kdWNlU291cmNlcyI6eyJjYW0iOnRydWUsIm1pYyI6dHJ1ZSwic2NyZWVuIjp0cnVlfSwiY2FuU2VuZERhdGEiOnRydWUsImNhblJlY3ZEYXRhIjp0cnVlLCJjYW5VcGRhdGVNZXRhZGF0YSI6dHJ1ZX0sIm1ldGFkYXRhIjoie1wid2FsbGV0QWRkcmVzc1wiOlwiYXhpdC5ldGhcIn0iLCJwZWVySWQiOiJwZWVySWQtMVhtOFctV1puZUtNa0VRaWptU1ViIiwicHVycG9zZSI6IlNESyIsInJvb21JbmZvIjp7InJvb21Mb2NrZWQiOmZhbHNlLCJtdXRlT25FbnRyeSI6ZmFsc2UsInJvb21UeXBlIjoiVklERU8iLCJ2aWRlb09uRW50cnkiOmZhbHNlfSwiaWF0IjoxNzAyMTIwMTY5LCJleHAiOjE3MDIxMzA5NjksImlzcyI6Imh1ZGRsZTAxIn0.TcGaMuTkO9Zc3_Lczspl3KSSTT6nILlI08yBIMVDO7_zSB846MjhEQAuYdSlAlt5qZoOU0uoxiHnJCmAAWJgGTW4fInfWqHtb_R5DQ75r1yLsBTxx2grB4DTRPGhgHkM1sZiMNOtGUhoPY0esVGoraKn_DOWIas9XSaJdfy7AwqnufzA2uO-44NqWAksNb1JsqqH23qn4n9st2PA2nJ3KCoQ3sDbLLmxl3XMEUweTGpSIQdv9YVMaYJ3gzGd4Lt3_2ap2sMr-Zf652PAedbIy3GgPkI7xc11aP2Pcv5RYOwfLY7f_fJmlTCsHQsygwX1oFOflLKjJjF10NqJIJi0fSPANJXykYDkx4tcNvknnotZhFkwCbcIuF9RpMe_KGCEW-Vi5cdsfGc8DZzNvd560ylaPqsCqsjks5sgMbCQo1H-WogVGGITD0c07Tc84heXcnnIZxUrm4jrbiipyfo385CZotrvfj86feOB0q_qSKmZ4qJApIGU0lWib4E-hFaD8UV33o7uCMemVUpL7-H0Ziv0DYDpmGA-kXxuKiegfs_Mh2Cl52qYXdO7qvupj_o575Pw7byHerODX1TQ6s5W7CEdMFlOS9tZjUpX2t_80MtSOwKjefZ5-GOotlJ5YEwecs-KKwIj-jRga10hxghJ-H2kmFm5f8ooKVzQLO6W1Zs",
+    });
+  };
+
   useEffect(() => {
     setRoomId(getRoomIdFromURL());
   }, [window.location.hash]);
-  console.log("room id", roomId);
-  console.log("players data", players);
+  // console.log("room id", roomId);
+  // console.log("players data", players);
   const { address, isConnected } = useAccount();
   const playerAddress = address;
-  console.log("add", address);
+  // console.log("add", address);
   const [playerdata, setPlayerdata] = useState("");
   useEffect(() => {
     async function getplayere() {
       const res = await getPlayerData({ playerAddress });
-      console.log("res", res);
+      // console.log("res", res);
       setPlayerdata(res);
     }
     getplayere();
   }, [address]);
-  console.log("playername", playerdata[0]);
+  // console.log("playername", playerdata[0]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -104,7 +192,7 @@ export const Leaderboard = () => {
         // console.log("game over")
         handleButtonClick();
         // localStorage.setItem('myObject', JSON.stringify(players));
-        navigate("/result");
+        // navigate("/result");
       }
     }
     return `${String(minutes).padStart(2, "0")}:${String(
@@ -138,6 +226,26 @@ export const Leaderboard = () => {
           >
             Time: {formatTime(timer)}
           </p>
+
+          <button type="button" onClick={createRoomId}>
+            create Room Id
+          </button>
+          <button type="button" onClick={createAccessToken}>
+            create Access Token
+          </button>
+
+          <button type="button" onClick={handleJoinRoom}>
+            join Room
+          </button>
+
+          <button
+            type="button"
+            onClick={async () => {
+              await enableAudio();
+            }}
+          >
+            Enable Audio
+          </button>
         </div>
 
         {players.map((player) => (
