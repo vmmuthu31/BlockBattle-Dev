@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@600&family=Koulen&family=Zilla+Slab:wght@700&display=swap');
 
 
 .root {
@@ -70,6 +69,10 @@ font-weight: 600;
 line-height: 242.622px; /* 100% */
 letter-spacing: 4.293px;
 text-transform: uppercase;
+}
+
+.fontpop{
+  font-family: 'Poppins';
 }
 
 .herobtn2{

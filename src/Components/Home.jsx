@@ -346,8 +346,8 @@ export default function Home() {
   }
 
   return (
-    <main className="bg-[url('https://blogger.googleusercontent.com/img/a/AVvXsEh7NNiHgAzWXZnrnTeAbIX3yoc5pOvv5JHOuQvMUyxTwEz3fzXaBC9NCusmkULXVQfIVCqEkTkJbLhkRdI24jASgAA-i6UuboaaCTSK6F6dehfB7tusiLaQYRzqkywaBWJjz0k5ZrdpsJWWhju9BIEAz7QeODOxadQgS-_l-ImuyUVLPAuZRDt6iiILGzY')]   bg-contain bg-no-repeat text-white min-h-screen">
-      <div className="bg-black min-h-screen ">
+    <main className=" bg-black min-h-screen">
+      <div className="bg-[url('https://blogger.googleusercontent.com/img/a/AVvXsEg39AIUhTdnF2XMWF49TXwa4xZqcNqIr6mIouVMRYhn5MsAKN1kccXzp7yGE-lfISQOCCbnTSvU1xI1JIxvBmHTLzhHCLePNJrXowFlaaxDgADweNo0iNAGyDpPML1rfZqA6-Ns5z4CtIMZAIhR3U1c3eAV-Pje3sMhSVVVgn4Onz4bKCRmkPtB0LGuhJo')]   bg-cover bg-no-repeat text-white min-h-screen ">
         <Navbar />
         <div className="pt-28">
           <div className="text-center font-bold pt-5 md:pt-5 font-serif  text-xl   md:text-9xl">
@@ -366,9 +366,9 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center">
-              <div className="flex mx-10 md:mx-0  md:text-4xl justify-center">
+              <div className="flex fontpop mx-10 md:mx-0  md:text-3xl justify-center">
                 <p>
-                  <span className="text-[#C5F404]">
+                  <span className="  text-[#C5F404]">
                     Decentralized Domination :
                   </span>{" "}
                   Command Your Character,
@@ -401,9 +401,11 @@ export default function Home() {
           </div>
         </div>
         <div className="text-[#CDFF00] text-center md:my-40 mt-10  text-xl md:text-[160px]">
-          <span className="glow1">NEXT</span>{" "}
-          <span className="glow2 font-semibold">GEN</span>
-          <span className="glow3 font-extrabold"> NOW</span>
+          <img
+            src="https://blogger.googleusercontent.com/img/a/AVvXsEg20vD_qWiSqH6UyoWrX5m2WAhP_TH-gTKYU1hSSTHnHm9xtkloWGfbZOb1OLgX44J_ZAVfdrL5RK8LG_aFQgtmY2WEOMh9_DM9JcVA_KvFaIU02W9KuwISUhFjyE68CAmxPMmfKG_bkMjrgfBFi3giUYr5LclJ4Jk2vQ8x6t8DTuk1jBxt8KBm2I3KfYM"
+            alt=""
+            className=" px-20"
+          />
         </div>
         <div className="flex flex-col  md:flex-row md:space-x-16 mx-5 md:mx-32 mt-20">
           <div className="flex  md:space-x-8 border-2 border-r-4 border-b-8 border-[#9FC610] px-5 md:px-20 py-5 rounded-xl md:rounded-full">
@@ -578,7 +580,7 @@ export default function Home() {
         </div>
         <div className="flex  md:flex-row flex-col mt-10 md:mt-0 md:mx-52   justify-between space-x-3">
           <img
-            className="md:h-60 h-40  w-auto"
+            className="md:h-52 h-40  w-auto"
             src="https://blogger.googleusercontent.com/img/a/AVvXsEjGxp02ByIDTr8MCj2zorW34gqPq0NL7yQN539S5AABjJGmxXlVLT9wEPeWhm1FIghikmRu4qy_CHnm88S9IzByI89pJGvSX3Y1xkunm6OPMMSHFyoryvThC2BC-4aUbT6E4K_lF_DL1LdHw6PxRDITLY_1plZppnpDLcJEKgimGhXZVEExdUfYazxqDi4"
             alt=""
           />
