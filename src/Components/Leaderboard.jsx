@@ -33,17 +33,20 @@ export const Leaderboard = () => {
   const [playerdata, setPlayerdata] = useState("");
 
   const addPlayerToGame = () => {
-    fetch("http://localhost:5000/auth/addPlayer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        gameId: roomId,
-        userId: playerdata[4],
-        name: playerdata[0],
-      }),
-    })
+    fetch(
+      "https://block-battle-dev-qr5z-45x9g08vs-mvairamuthu20000-gmailcom.vercel.app/auth/addPlayer",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          gameId: roomId,
+          userId: playerdata[4],
+          name: playerdata[0],
+        }),
+      }
+    )
       .then((response) => response.text())
       .then((data) => console.log(data))
       .catch((error) => console.error("Error adding player:", error));
