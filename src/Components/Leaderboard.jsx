@@ -33,7 +33,7 @@ export const Leaderboard = () => {
   const [playerdata, setPlayerdata] = useState("");
 
   const addPlayerToGame = () => {
-    fetch("http://localhost:5000/addPlayer", {
+    fetch("http://localhost:5000/auth/addPlayer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
