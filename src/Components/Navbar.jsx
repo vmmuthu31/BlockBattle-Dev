@@ -12,7 +12,6 @@ function Navbar() {
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const navigation = [
     { name: "How it works", href: "/" },
     { name: "Marketplace", href: "/optstore" },
