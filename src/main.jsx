@@ -31,6 +31,9 @@ import {
   xdcTestnet,
   lineaTestnet,
   filecoinHyperspace,
+  scrollSepolia,
+  filecoinCalibration,
+  arbitrumGoerli,
 } from "viem/chains";
 
 const { chains, publicClient } = configureChains(
@@ -42,7 +45,9 @@ const { chains, publicClient } = configureChains(
     base,
     xdcTestnet,
     lineaTestnet,
-    filecoinHyperspace,
+    filecoinCalibration,
+    arbitrumGoerli,
+    scrollSepolia,
   ],
   [publicProvider()]
 );

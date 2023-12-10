@@ -329,6 +329,7 @@ export default function Home() {
   const navigateTo = useNavigate();
 
   async function reg() {
+    console.log("intereacting contract");
     const playername = generateRandomName();
 
     const res = await isusrregistered({ playeradd });
@@ -355,13 +356,13 @@ export default function Home() {
               <img
                 src="https://blogger.googleusercontent.com/img/a/AVvXsEgQzzWX2Yv7Wbrsq5it0UQsl14mDTmXUQnkAm6BkhhNqZeBjreNAR6H3Ra_EJOcT6wUqeaEOlWfqkFHm-SyZJ1ko5A_vth7aUPjt7ju3M_3OhZtGQktsfZiFFuk4HOO9VO3JA69AiY0yIkfHa_cYSC-4tYAAzjh8PBWOpbPu-_MBhcnhi8uqptx-qcOiZc"
                 alt=""
-                className="h-20 w-auto"
+                className="md:h-20 h-8 w-auto"
               />
               <p className="herotext">BLOCKBATTLE</p>
               <img
                 src="https://blogger.googleusercontent.com/img/a/AVvXsEg1wUR4ock3lkLd6GwFLwwaeA03b8O1O4xAPhtQMg2W9mKJt1Voiw7Ld94ruH-i3ta7f9pWOI_FmtqxzEUHm4f-cUscPTTWf8BmVIOMA4QFbbeYnXO1x2-2Y7Z3b_tcLaV9JgBK6gNpvxs906WoKWYej8RzYY3L9knZ62gmpd2gMXehiN3jOu7JWF0DHfE"
                 alt=""
-                className="h-20 w-auto"
+                className="md:h-20 h-8 w-auto"
               />
             </div>
 
