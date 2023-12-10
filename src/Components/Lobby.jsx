@@ -246,12 +246,12 @@ function Lobby() {
               </p>
             </div>
             <div className="flex justify-center">
-              <a
+              <Link
                 className="playbtm px-10 font-semibold  py-2 mt-5 text-xl text-black "
                 href="/game"
               >
                 Play!!
-              </a>
+              </Link>
             </div>
           </div>
         </div>
