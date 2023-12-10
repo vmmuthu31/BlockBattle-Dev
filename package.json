@@ -11,6 +11,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@huddle01/react": "^1.0.0-alpha.58",
+    "@huddle01/server-sdk": "^1.0.0-alpha.25",
     "@rainbow-me/rainbowkit": "^1.3.0",
     "@react-three/drei": "^9.90.1",
     "@react-three/fiber": "^8.15.12",

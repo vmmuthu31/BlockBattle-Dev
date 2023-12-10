@@ -7,6 +7,19 @@ import { useAccount } from "wagmi";
 import { getPlayerData } from "../config/BlockchainServices";
 import { setgameid } from "../../store/connection";
 
+import axios from "axios";
+
+import { useRoom } from "@huddle01/react/hooks";
+import { AccessToken, Role } from "@huddle01/server-sdk/auth";
+
+import {
+  useLocalVideo,
+  useLocalAudio,
+  usePeerIds,
+} from "@huddle01/react/hooks";
+
+import RemotePeer from "./RemotePeer";
+
 const getRoomIdFromURL = () => {
   const hash = window.location.hash;
   const roomId = hash.split("=")[1]; // Split the hash by '=' and get the second part
@@ -27,6 +40,13 @@ export const Leaderboard = () => {
     dispatch(setgameid(roomId));
   };
 
+  const [huddleRoomID, setHuddleRoomID] = useState("");
+
+  const [huddleToken, setHuddleToken] = useState("");
+
+  const [muted, setMuted] = useState(false);
+  const { peerIds } = usePeerIds();
+
   console.log("room id", roomId);
   console.log("players data", players);
 
@@ -35,6 +55,92 @@ export const Leaderboard = () => {
   console.log("add", address);
   const [playerdata, setPlayerdata] = useState("");
   console.log("Player Name", playerdata[0]);
+
+  const { stream, enableAudio, disableAudio, changeVideoSource } =
+    useLocalAudio();
+  // const { enableAudio, isAudioOn, stream: audioStream } = useLocalAudio();
+
+  const { joinRoom } = useRoom({
+    // Triggered when joinRoom() method calls
+    onJoin: () => {
+      alert("joined a room");
+      console.info("some stuff");
+    },
+  });
+
+  const createRoomId = async () => {
+    const API_KEY = "5t0VTzU1IVTBm74AYyzWPRpRkCbv6M-r";
+    const response = await axios.post(
+      "https://api.huddle01.com/api/v1/create-room",
+      {
+        title: "Huddle01-Test",
+        hostWallets: ["0x324298486F9b811eD5e062275a58363d1B2E93eB"],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "5t0VTzU1IVTBm74AYyzWPRpRkCbv6M-r",
+        },
+      }
+    );
+    alert(response);
+    console.log(response);
+    console.log(response.data.data.roomId);
+    setHuddleRoomID(response.data.data.roomId);
+  };
+
+  const createAccessToken = async () => {
+    const accessToken = new AccessToken({
+      apiKey: "5t0VTzU1IVTBm74AYyzWPRpRkCbv6M-r",
+      roomId: "aoi-lqtl-ibs",
+      role: Role.HOST,
+      permissions: {
+        admin: true,
+        canConsume: true,
+        canProduce: true,
+        canProduceSources: {
+          cam: true,
+          mic: true,
+          screen: true,
+        },
+        canRecvData: true,
+        canSendData: true,
+        canUpdateMetadata: true,
+      },
+    });
+
+    const tempToken = await accessToken.toJwt();
+
+    console.log(tempToken, "temptoken");
+
+    alert(tempToken);
+
+    const res = await joinRoom({
+      roomId: "aoi-lqtl-ibs",
+      token: tempToken,
+    });
+    await enableAudio();
+
+    setHuddleToken(tempToken);
+
+    setJoinData((prev) => ({ ...prev, token: tempToken }));
+  };
+
+  const handleJoinRoom = async () => {
+    await createAccessToken();
+    await joinRoom({
+      roomId: "aoi-lqtl-ibs",
+      token: huddleToken,
+    });
+    await enableAudio();
+
+    setMuted(true);
+  };
+  const handleExitRoom = async () => {
+    await disableAudio();
+
+    setMuted(false);
+  };
 
   useEffect(() => {
     const addPlayerToGame = () => {
@@ -178,6 +284,7 @@ export const Leaderboard = () => {
         >
           <p
             id="timer_con"
+            className="absolute"
             style={{
               backgroundColor: "#75b0feab",
               padding: "4px 11px",
@@ -189,12 +296,38 @@ export const Leaderboard = () => {
           >
             Time: {formatTime(timer)}
           </p>
+
+          {!muted && (
+            <button
+              type="button"
+              className="absolute rounded-full border py-3 px-5 text-white bg-blue-600 right-10"
+              onClick={handleJoinRoom}
+            >
+              Unmute{" "}
+            </button>
+          )}
+
+          {muted && (
+            <button
+              type="button"
+              className="absolute rounded-full border py-3 px-5 text-white bg-blue-600 right-40"
+              onClick={handleExitRoom}
+            >
+              Mute{" "}
+            </button>
+          )}
+
+          <div className="mt-4 mb-32 grid gap-2 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left invisible">
+            {peerIds.map((peerId) =>
+              peerId ? <RemotePeer key={peerId} peerId={peerId} /> : null
+            )}
+          </div>
         </div>
 
         {updatedPlayers.map((player) => (
           <div
             key={player.id}
-            className={`bg-opacity-60 backdrop-blur-sm flex items-center rounded-lg gap-2 p-2 min-w-[140px]`}
+            className="bg-opacity-60 backdrop-blur-sm flex items-center rounded-lg gap-2 p-2 min-w-[140px]"
             style={{ backgroundColor: "#75B0FE" }}
           >
             <img
@@ -205,9 +338,7 @@ export const Leaderboard = () => {
               }}
             />
             <div className="flex-grow">
-              <h2 className={`font-bold text-sm`}>
-                {player.state.profile.name}
-              </h2>
+              <h2 className="font-bold text-sm">{player.state.profile.name}</h2>
 
               <div className="flex text-sm items-center gap-4">
                 <p>🔫 {player.state.kills}</p>
@@ -243,6 +374,7 @@ export const Leaderboard = () => {
           />
         </svg>
       </button>
+          
     </>
   );
 };

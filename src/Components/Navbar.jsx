@@ -15,7 +15,7 @@ function Navbar() {
 
   const navigation = [
     { name: "How it works", href: "/" },
-    { name: "Marketplace", href: "/" },
+    { name: "Marketplace", href: "/optstore" },
   ];
 
   return (
@@ -29,7 +29,7 @@ function Navbar() {
             <Link href="/" className="flex space-x-4">
               <img
                 className="h-16 w-auto"
-                src="https://blogger.googleusercontent.com/img/a/AVvXsEgab_EWB7_IQbqmQAMhbmddsxfjqV31Bd7MoXURME_mvITfAyNJ2-D_AVewslaXvHC8ltuqi4oLrDdHdWPvG4YgLTaxz_bBE0h5C4XR196sWWp6Ef91piik7praKYcM4WcbgL7mXmOdWbBZ67JLPD6SqvID_tiP1ml2Wqf8CdQv87QpJ_KWare6aMe5ugI"
+                src="https://blogger.googleusercontent.com/img/a/AVvXsEj9mo4KKbkXdeSQ53Tokus8TLZrjy4Zim4zpkdRRN75ejiBuW3qAN_QKnxOvIW9OvZXIbEwyLPXmgAR9b80zPmusWya4y30ZUkXVc3JEmB_wZWOcpFoXMsNq9XyllINhPZIIBhz6p_0olanU6F4HMA-xf2PoPoWTuyLi25j6YNHJe-RdMK56t03lDhQ-6s"
                 alt=""
               />
               <p className=" text-xl mt-8 md:mt-2 md:text-2xl font-bold font-serif ">
@@ -61,9 +61,6 @@ function Navbar() {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <div className="flex md:flex-row flex-col items-center justify-center md:space-y-0 md:space-x-4 space-y-4">
-              <button className="herobtn px-6 py-3 text-lg font-semibold text-black ">
-                Play Now!
-              </button>
               <ConnectButton />
             </div>
           </div>

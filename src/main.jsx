@@ -22,10 +22,28 @@ import {
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { polygonZkEvmTestnet } from "viem/chains";
+import {
+  polygonZkEvmTestnet,
+  mantleTestnet,
+  polygonMumbai,
+  celoAlfajores,
+  base,
+  xdcTestnet,
+  lineaTestnet,
+  filecoinHyperspace,
+} from "viem/chains";
 
 const { chains, publicClient } = configureChains(
-  [polygonZkEvmTestnet],
+  [
+    polygonZkEvmTestnet,
+    mantleTestnet,
+    polygonMumbai,
+    celoAlfajores,
+    base,
+    xdcTestnet,
+    lineaTestnet,
+    filecoinHyperspace,
+  ],
   [publicProvider()]
 );
 
@@ -40,36 +58,48 @@ const wagmiConfig = createConfig({
   connectors,
   publicClient,
 });
+import { HuddleClient, HuddleProvider } from "@huddle01/react";
+
+const huddleClient = new HuddleClient({
+  projectId: "64oMGEVTnuPWGxDY-MGTKlLQe7xLje4f",
+  options: {
+    activeSpeakers: {
+      size: 8,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Router>
-      <LightNodeProvider
-        options={{ defaultBootstrap: true }}
-        protocols={[Protocols.Store, Protocols.Filter, Protocols.LightPush]}
-      >
-        <Provider store={store}>
-          <WagmiConfig config={wagmiConfig}>
-            <RainbowKitProvider chains={chains}>
-              <Routes>
-                <Route path="/" exact element={<Home />} />
-                <Route path="/lobby" exact element={<Lobby />} />
-                <Route path="/game" exact element={<App />} />
-                <Route path="/result" exact element={<Result />} />
-                <Route
-                  path="/Character"
-                  exact
-                  element={<SlideApp data={"1"} />}
-                />
-                <Route path="/Guns" exact element={<SlideApp data={"2"} />} />
-                <Route path="/Car" exact element={<SlideApp data={"3"} />} />
-                <Route path="/options" exact element={<Options />} />
-                <Route path="/optstore" exact element={<StoreOptions />} />
-              </Routes>
-            </RainbowKitProvider>
-          </WagmiConfig>
-        </Provider>
-      </LightNodeProvider>
-    </Router>
+    <HuddleProvider key="huddle01-provider" client={huddleClient}>
+      <Router>
+        <LightNodeProvider
+          options={{ defaultBootstrap: true }}
+          protocols={[Protocols.Store, Protocols.Filter, Protocols.LightPush]}
+        >
+          <Provider store={store}>
+            <WagmiConfig config={wagmiConfig}>
+              <RainbowKitProvider chains={chains}>
+                <Routes>
+                  <Route path="/" exact element={<Home />} />
+                  <Route path="/lobby" exact element={<Lobby />} />
+                  <Route path="/game" exact element={<App />} />
+                  <Route path="/result" exact element={<Result />} />
+                  <Route
+                    path="/Character"
+                    exact
+                    element={<SlideApp data={"1"} />}
+                  />
+                  <Route path="/Guns" exact element={<SlideApp data={"2"} />} />
+                  <Route path="/Car" exact element={<SlideApp data={"3"} />} />
+                  <Route path="/options" exact element={<Options />} />
+                  <Route path="/optstore" exact element={<StoreOptions />} />
+                </Routes>
+              </RainbowKitProvider>
+            </WagmiConfig>
+          </Provider>
+        </LightNodeProvider>
+      </Router>
+    </HuddleProvider>
   </React.StrictMode>
 );
